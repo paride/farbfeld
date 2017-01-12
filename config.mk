@@ -17,9 +17,9 @@ INCS =
 LIBS =
 
 # flags
-CPPFLAGS = -D_DEFAULT_SOURCE
-CFLAGS   = -std=c99 -pedantic -Wall -Os ${INCS}
-LDFLAGS  = -s ${LIBS}
+CPPFLAGS += -D_DEFAULT_SOURCE
+CFLAGS   += -std=c99 -pedantic -Wall -Os ${INCS}
+LDFLAGS  += -s ${LIBS}
 
 # compiler and linker
 CC = cc
