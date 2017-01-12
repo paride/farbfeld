@@ -1,1 +1,2 @@
 fix-installation-paths
+respect-flags-passed-by-debhelper
