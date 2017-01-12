@@ -4,8 +4,8 @@ VERSION = 2
 # Customize below to fit your system
 
 # paths
-PREFIX = /usr/local
-MANPREFIX = ${PREFIX}/man
+PREFIX = /usr
+MANPREFIX = ${PREFIX}/share/man
 
 PNGLIB = /usr/local/lib
 PNGINC = /usr/local/include
