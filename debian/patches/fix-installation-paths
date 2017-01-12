@@ -1,0 +1,23 @@
+From: Dmitry Bogatov <KAction@gnu.org>
+Date: Thu, 12 Jan 2017 14:24:35 +0300
+X-Dgit-Generated: 2.20170109-1 39b48232f24a32481cd68b4482ed0ec24ea40220
+Subject: Fix installation paths
+
+ * prefix=/usr
+ * manpath=/usr/share/man
+
+---
+
+--- farbfeld-2.20170109.orig/config.mk
++++ farbfeld-2.20170109/config.mk
+@@ -4,8 +4,8 @@ VERSION = 2
+ # Customize below to fit your system
+ 
+ # paths
+-PREFIX = /usr/local
+-MANPREFIX = ${PREFIX}/man
++PREFIX = /usr
++MANPREFIX = ${PREFIX}/share/man
+ 
+ PNGLIB = /usr/local/lib
+ PNGINC = /usr/local/include
