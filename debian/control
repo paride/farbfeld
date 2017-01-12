@@ -1,0 +1,22 @@
+Source: farbfeld
+Section: graphics
+Priority: extra
+Maintainer: Dmitry Bogatov <KAction@gnu.org>
+Build-Depends: debhelper (>=9)
+Standards-Version: 3.9.8
+Homepage: http://tools.suckless.org/farbfeld
+Vcs-Git: https://anonscm.debian.org/cgit/users/kaction-guest/farbfeld.git
+Vcs-Browser: https://anonscm.debian.org/cgit/users/kaction-guest/farbfeld.git
+
+Package: farbfeld
+Architecture: any
+Multi-Arch: foreign
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: lossless image-format designed to be parsed and piped easily
+ Farbfeld is a lossless image-format designed to be parsed and piped
+ easily. It is designed to be as simple as possible, leaving the task
+ of compression to outside tools, beating PNG's filesize in many
+ cases.
+ .
+ This package contains tools for converting between farbfeld format
+ and other image formats (png, jpeg, ppm, pam, git)
