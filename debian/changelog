@@ -1,5 +1,5 @@
-farbfeld (2.20170109-1) UNRELEASED; urgency=low
+farbfeld (2.20170109-1) unstable; urgency=low
 
   * Initial release (Closes: #851185)
 
- -- Dmitry Bogatov <KAction@gnu.org>  Thu, 12 Jan 2017 13:49:36 +0300
+ -- Dmitry Bogatov <KAction@gnu.org>  Fri, 13 Jan 2017 09:12:09 +0300
