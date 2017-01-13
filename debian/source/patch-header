@@ -1,0 +1,10 @@
+The Debian packaging of farbfeld is maintained using dgit.  For the sake
+of an efficient workflow, Debian modifications to the upstream
+source are squashed into a single diff, rather than a series of
+quilt patches.  To obtain a patch queue for package version
+2.20170109-1:
+
+    # apt-get install dgit
+    % dgit clone foo
+    % cd foo
+    % git log --oneline 2.20170109-1..debian/2.20170109 -- . ':!debian'
