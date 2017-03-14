@@ -19,4 +19,4 @@ Description: lossless image-format designed to be parsed and piped easily
  cases.
  .
  This package contains tools for converting between farbfeld format
- and other image formats (png, jpeg, ppm, pam, git)
+ and other image formats (png, jpeg, ppm, pam, gif)
