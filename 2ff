@@ -24,6 +24,11 @@ image/jpeg)
 	jpg2ff < "$TMP"
 	;;
 *)
+	if [ ! -x /usr/bin/convert ] ; then
+		printf "%s: cant convert from %s -- missing \`convert' program" "$0" "$FORMAT" >&2
+		printf "Run \`apt-get install imagemagick' to install it" >&2
+		exit 1
+	fi
 	convert "$TMP" png:- 2>/dev/null | png2ff 2>/dev/null
 	;;
 esac
