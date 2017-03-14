@@ -12,6 +12,7 @@ Package: farbfeld
 Architecture: any
 Multi-Arch: foreign
 Depends: ${misc:Depends}, ${shlibs:Depends}
+Recommends: imagemagick
 Description: lossless image-format designed to be parsed and piped easily
  Farbfeld is a lossless image-format designed to be parsed and piped
  easily. It is designed to be as simple as possible, leaving the task
