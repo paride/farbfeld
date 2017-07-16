@@ -1,5 +1,6 @@
-farbfeld (2.20170109-1) unstable; urgency=low
+farbfeld (3-1) unstable; urgency=low
 
   * Initial release (Closes: #851185)
+    Debianisation mostly due to Dmitry Bogatov.
 
- -- Dmitry Bogatov <KAction@gnu.org>  Tue, 14 Mar 2017 08:52:39 +0300
+ -- Paride Legovini <pl@ninthfloor.org>  Tue, 11 Jul 2017 15:37:09 +0200

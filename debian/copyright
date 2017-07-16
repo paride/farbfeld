@@ -12,7 +12,9 @@ Copyright:
 License: ISC
 
 Files: debian/*
-Copyright: 2017 Dmitry Bogatov <KAction@gnu.org>
+Copyright:
+ 2017 Dmitry Bogatov <KAction@gnu.org>
+ 2017 Paride Legovini <pl@ninthfloor.org>
 License: ISC
 
 License: ISC
