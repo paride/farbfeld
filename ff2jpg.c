@@ -11,10 +11,9 @@
 #include <jpeglib.h>
 
 #include "arg.h"
+#include "util.h"
 
-char *argv0;
-
-METHODDEF(void)
+static void
 jpeg_error(j_common_ptr js)
 {
 	fprintf(stderr, "%s: libjpeg: ", argv0);
@@ -23,129 +22,103 @@ jpeg_error(j_common_ptr js)
 }
 
 static void
+jpeg_setup_writer(struct jpeg_compress_struct *s, struct jpeg_error_mgr *e,
+                  uint32_t w, uint32_t h, int quality, int opt)
+{
+	jpeg_create_compress(s);
+	e->error_exit = jpeg_error;
+	s->err = jpeg_std_error(e);
+
+	jpeg_stdio_dest(s, stdout);
+	s->image_width = w;
+	s->image_height = h;
+	s->input_components = 3;     /* color components per pixel */
+	s->in_color_space = JCS_RGB; /* output color space */
+	jpeg_set_defaults(s);
+
+	if (opt) {
+		s->optimize_coding = 1;
+	}
+	jpeg_set_quality(s, quality, 1);
+
+	jpeg_start_compress(s, 1);
+}
+
+static void
 usage(void)
 {
-	fprintf(stderr, "usage: %s [-b #rrggbb] [-o] [-q quality]\n", argv0);
+	fprintf(stderr, "usage: %s [-b colour] [-o] [-q quality]\n", argv0);
 	exit(1);
 }
 
 int
 main(int argc, char *argv[])
 {
-	JSAMPROW row_pointer[1]; /* pointer to a single row */
-	struct jpeg_compress_struct cinfo;
+	struct jpeg_compress_struct jcomp;
 	struct jpeg_error_mgr jerr;
 	size_t rowlen;
 	uint64_t a;
-	uint32_t hdr[4], width, height, i, j, k, l;
+	uint32_t width, height, i, j, k, l;
 	uint16_t *row, mask[3] = { 0xffff, 0xffff, 0xffff };
 	uint8_t *rowout;
-	char *color, colfmt[] = "%#x%#x%#x";
-	unsigned int collen, col[3], colfac, quality = 85, optimize = 0;
+	int optimize = 0, quality = 85;
 
-	argv0 = argv[0];
+	/* arguments */
 	ARGBEGIN {
 	case 'b':
-		color = EARGF(usage());
-		if (color[0] == '#') {
-			color++;
-		}
-		collen = strlen(color);
-		if (collen != 3 && collen != 6 && collen != 12) {
+		if (parse_mask(EARGF(usage()), mask)) {
 			usage();
-		}
-		colfmt[1] = colfmt[4] = colfmt[7] = ((collen / 3) + '0');
-		if (sscanf(color, colfmt, col, col + 1, col + 2) != 3) {
-			usage();
-		}
-		/* UINT16_MAX / 255 = 257; UINT16_MAX / 15 = 4369 */
-		colfac = (collen == 3) ? 4369 : (collen == 6) ? 257 : 1;
-		for (i = 0; i < 3; i++) {
-			mask[i] = col[i] * colfac;
 		}
 		break;
 	case 'o':
 		optimize = 1;
 		break;
 	case 'q':
-		if ((quality = atoi(EARGF(usage()))) > 100)
-			usage();
+		quality = estrtonum(EARGF(usage()), 0, 100);
 		break;
 	default:
 		usage();
 	} ARGEND
 
-	if (argc)
+	if (argc) {
 		usage();
+	}
 
-	/* header */
-	if (fread(hdr, sizeof(*hdr), 4, stdin) != 4) {
-		goto readerr;
-	}
-	if (memcmp("farbfeld", hdr, sizeof("farbfeld") - 1)) {
-		fprintf(stderr, "%s: invalid magic value\n", argv0);
-		return 1;
-	}
-	width = ntohl(hdr[2]);
-	height = ntohl(hdr[3]);
-
-	if (width > SIZE_MAX / ((sizeof("RGBA") - 1) * sizeof(uint16_t))) {
-		fprintf(stderr, "%s: row length integer overflow\n", argv0);
-		return 1;
-	}
+	/* prepare */
+	ff_read_header(&width, &height);
+	jpeg_setup_writer(&jcomp, &jerr, width, height, quality, optimize);
+	row = ereallocarray(NULL, width, (sizeof("RGBA") - 1) * sizeof(uint16_t));
 	rowlen = width * (sizeof("RGBA") - 1);
-	if (!(row = malloc(rowlen * sizeof(uint16_t)))) {
-		fprintf(stderr, "%s: malloc: %s\n", argv0, strerror(errno));
-		return 1;
-	}
-	if (!(rowout = malloc(width * (sizeof("RGB") - 1) * sizeof(uint8_t)))) {
-		fprintf(stderr, "%s: malloc: %s\n", argv0, strerror(errno));
-		return 1;
-	}
-	row_pointer[0] = rowout;
+	rowout = ereallocarray(NULL, width, (sizeof("RGB") - 1) * sizeof(uint8_t));
 
-	jerr.error_exit = jpeg_error;
-
-	jpeg_create_compress(&cinfo);
-	cinfo.err = jpeg_std_error(&jerr);
-	jpeg_stdio_dest(&cinfo, stdout);
-	cinfo.image_width = width;
-	cinfo.image_height = height;
-	cinfo.input_components = 3;  /* color components per pixel */
-	cinfo.in_color_space = JCS_RGB; /* output color space */
-	jpeg_set_defaults(&cinfo);
-	if (optimize)
-		cinfo.optimize_coding = TRUE;
-	jpeg_set_quality(&cinfo, quality, TRUE);
-
-	jpeg_start_compress(&cinfo, TRUE);
-
-	/* write rows */
+	/* write data */
 	for (i = 0; i < height; ++i) {
 		if (fread(row, sizeof(uint16_t), rowlen, stdin) != rowlen) {
-			goto readerr;
+			if (ferror(stdin)) {
+				fprintf(stderr, "%s: fread: %s\n", argv0,
+				        strerror(errno));
+			} else {
+				fprintf(stderr, "%s: unexpected end of file\n",
+				        argv0);
+			}
+			return 1;
 		}
 		for (j = 0, k = 0; j < rowlen; j += 4, k += 3) {
 			a = ntohs(row[j + 3]);
 			for (l = 0; l < 3; l++) {
+				/* alpha blending and 8-bit-reduction */
 				rowout[k + l] = (a * ntohs(row[j + l]) +
-				                 (65535 - a) * mask[l]) /
-				                (257 * 65535);
+				                 (UINT16_MAX - a) * mask[l]) /
+				                (UINT16_MAX *
+						 (UINT16_MAX / UINT8_MAX));
 			}
 		}
-		jpeg_write_scanlines(&cinfo, row_pointer, 1);
+		jpeg_write_scanlines(&jcomp, &rowout, 1);
 	}
 
-	jpeg_finish_compress(&cinfo);
-	jpeg_destroy_compress(&cinfo);
+	/* clean up */
+	jpeg_finish_compress(&jcomp);
+	jpeg_destroy_compress(&jcomp);
 
-	return 0;
-readerr:
-	if (ferror(stdin)) {
-		fprintf(stderr, "%s: fread: %s\n", argv0, strerror(errno));
-	} else {
-		fprintf(stderr, "%s: unexpected end of file\n", argv0);
-	}
-
-	return 1;
+	return fshut(stdout, "<stdout>");
 }
