@@ -1,35 +1,39 @@
 The Debian packaging of farbfeld is maintained in git, using the merging
-workflow described in dgit-maint-merge(7).  There isn't a patch
-queue that can be represented as a quilt series.
+workflow described in dgit-maint-merge(7). There isn't a patch queue
+that can be represented as a quilt series.
 
-A detailed breakdown of the changes is available from their
-canonical representation - git commits in the packaging repository.
+A detailed breakdown of the changes is available from their canonical
+representation - git commits in the packaging repository. For example,
+to see the changes made by the Debian maintainer in the first upload of
+upstream version 3, you could use:
 
     % git clone https://git.dgit.debian.org/farbfeld
-    % cd foo
-    % git log --oneline 2.20170109-1..debian/2.20170109 -- . ':!debian'
+    % cd farbfeld
+    % git log --oneline 3..debian/3-1 -- . ':!debian'
 
-(If you have dgit, use `dgit clone foo', rather than plain `git
-clone'.)
+(If you have dgit, use `dgit clone farbfeld`, rather than plain `git
+clone`.)
 
 A single combined diff, containing all the changes, follows.
---- farbfeld-2.20170109.orig/2ff
-+++ farbfeld-2.20170109/2ff
-@@ -24,6 +24,11 @@ image/jpeg)
- 	jpg2ff < "$TMP"
- 	;;
- *)
-+	if [ ! -x /usr/bin/convert ] ; then
-+		printf "%s: cant convert from %s -- missing \`convert' program" "$0" "$FORMAT" >&2
-+		printf "Run \`apt-get install imagemagick' to install it" >&2
-+		exit 1
-+	fi
- 	convert "$TMP" png:- 2>/dev/null | png2ff 2>/dev/null
- 	;;
- esac
---- farbfeld-2.20170109.orig/config.mk
-+++ farbfeld-2.20170109/config.mk
-@@ -4,8 +4,8 @@ VERSION = 2
+
+--- farbfeld-3.orig/2ff
++++ farbfeld-3/2ff
+@@ -25,6 +25,12 @@ else
+ 		jpg2ff < "$TMP"
+ 		;;
+ 	*)
++		if [ ! -x /usr/bin/convert ] ; then
++			printf "%s: cant convert from %s -- missing \`convert' program" "$0" "$FORMAT" >&2
++			printf "Run \`apt-get install imagemagick' to install it" >&2
++			exit 1
++		fi
++
+ 		convert "$TMP" png:- | png2ff
+ 		;;
+ 	esac
+--- farbfeld-3.orig/config.mk
++++ farbfeld-3/config.mk
+@@ -4,13 +4,13 @@ VERSION = 3
  # Customize below to fit your system
  
  # paths
@@ -38,18 +42,13 @@ A single combined diff, containing all the changes, follows.
 +PREFIX = /usr
 +MANPREFIX = ${PREFIX}/share/man
  
- PNGLIB = /usr/local/lib
- PNGINC = /usr/local/include
-@@ -17,9 +17,9 @@ INCS =
- LIBS =
- 
  # flags
 -CPPFLAGS = -D_DEFAULT_SOURCE
--CFLAGS   = -std=c99 -pedantic -Wall -Os ${INCS}
--LDFLAGS  = -s ${LIBS}
+-CFLAGS   = -std=c99 -pedantic -Wall -Wextra -Os
+-LDFLAGS  = -s
 +CPPFLAGS += -D_DEFAULT_SOURCE
-+CFLAGS   += -std=c99 -pedantic -Wall -Os ${INCS}
-+LDFLAGS  += -s ${LIBS}
++CFLAGS   += -std=c99 -pedantic -Wall -Wextra -Os
++LDFLAGS  += -s
+ PNG-LDFLAGS = -lpng
+ JPG-LDFLAGS = -ljpeg
  
- # compiler and linker
- CC = cc
