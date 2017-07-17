@@ -3,4 +3,4 @@ farbfeld (3-1) unstable; urgency=low
   * Initial release (Closes: #851185)
     Debianisation mostly due to Dmitry Bogatov.
 
- -- Paride Legovini <pl@ninthfloor.org>  Tue, 11 Jul 2017 15:37:09 +0200
+ -- Paride Legovini <pl@ninthfloor.org>  Mon, 17 Jul 2017 08:36:22 +0200
