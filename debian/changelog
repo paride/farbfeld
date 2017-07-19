@@ -1,3 +1,9 @@
+farbfeld (3-2) unstable; urgency=medium
+
+  * Try upload again after accidental reject
+
+ -- Paride Legovini <pl@ninthfloor.org>  Wed, 19 Jul 2017 23:42:37 +0200
+
 farbfeld (3-1) unstable; urgency=low
 
   * Initial release (Closes: #851185)
