@@ -5,10 +5,21 @@ Source: http://tools.suckless.org/farbfeld
 
 Files: *
 Copyright:
- 2014-2016 Laslo Hunhold <dev@frign.de>
+ 2014-2017 Laslo Hunhold <dev@frign.de>
  2014-2015 Dimitris Papastamos <sin@2f30.org>
  2014-2016 Hiltjo Posthuma <hiltjo@codemadness.org>
  2015 Willy Goiffon <willy@mailoo.org>
+License: ISC
+
+Files: util.c
+Copyright:
+ 2014-2017 Laslo Hunhold <dev@frign.de>
+ 2014-2015 Dimitris Papastamos <sin@2f30.org>
+ 2014-2016 Hiltjo Posthuma <hiltjo@codemadness.org>
+ 2015 Willy Goiffon <willy@mailoo.org>
+ 2008 Otto Moerbeek <otto@drijf.net>
+ 2004 Ted Unangst <tedu@openbsd.org>
+ 2004 Todd Miller <millert@openbsd.org>
 License: ISC
 
 Files: debian/*
