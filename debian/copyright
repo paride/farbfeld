@@ -18,9 +18,37 @@ Copyright:
  2014-2016 Hiltjo Posthuma <hiltjo@codemadness.org>
  2015 Willy Goiffon <willy@mailoo.org>
  2008 Otto Moerbeek <otto@drijf.net>
- 2004 Ted Unangst <tedu@openbsd.org>
- 2004 Todd Miller <millert@openbsd.org>
+ 2004 Ted Unangst
+ 2004 Todd Miller
 License: ISC
+
+Files: arg.h
+ 2017 20h
+License: ISC
+Comment:
+ Got written permission from the Author.
+ The relevant email excerpts follow.
+ .
+ On 2017-07-25 13:56, Christoph Lohmann wrote:
+ > On Tue, 25 Jul 2017 13:56:30 Paride Legovini <pl@ninthfloor.org> wrote:
+ >
+ > > while working on software packaging I encountered your arg.h file,
+ > [...]
+ > > May I assume it's MIT/X Consortium licensed?
+ >
+ > You can assume that it is MIT/X licensed.
+ .
+ On 2017-07-26 13:20, Christoph Lohmann <20h@r-36.net> wrote:
+ > On Wed, 26 Jul 2017 13:20:40 Paride Legovini <pl@ninthfloor.org> wrote:
+ >
+ > > May I publicly quote your email?
+ >
+ > You are allowed to do that.
+ >
+ > > For the purpose of license homogeneity, may I assume arg.h to be
+ > > also ISC licensed?
+ >
+ > Yes
 
 Files: debian/*
 Copyright:
