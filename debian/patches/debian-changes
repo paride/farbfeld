@@ -23,7 +23,7 @@ A single combined diff, containing all the changes, follows.
  		;;
  	*)
 +		if [ ! -x /usr/bin/convert ] ; then
-+			printf "%s: cant convert from %s -- missing \`convert' program" "$0" "$FORMAT" >&2
++			printf "%s: cant convert from %s -- missing \`convert' program" "$0" "$MIME" >&2
 +			printf "Run \`apt install imagemagick' to install it" >&2
 +			exit 1
 +		fi
