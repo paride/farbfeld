@@ -5,7 +5,7 @@ farbfeld (3-3) unstable; urgency=medium
   * Install the FORMAT and README documentation files
   * Hardened build (hardening=+all)
 
- -- Paride Legovini <pl@ninthfloor.org>  Mon, 31 Jul 2017 10:39:25 +0200
+ -- Paride Legovini <pl@ninthfloor.org>  Mon, 31 Jul 2017 14:49:34 +0200
 
 farbfeld (3-2) unstable; urgency=medium
 
