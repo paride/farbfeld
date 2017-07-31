@@ -3,8 +3,9 @@ farbfeld (3-3) unstable; urgency=medium
   * Add missing references to debian/copyright
   * 2ff: fix the error message for missing `convert'
   * Install the FORMAT and README documentation files
+  * Hardened build (hardening=+all)
 
- -- Paride Legovini <pl@ninthfloor.org>  Fri, 28 Jul 2017 11:07:34 +0200
+ -- Paride Legovini <pl@ninthfloor.org>  Mon, 31 Jul 2017 10:39:25 +0200
 
 farbfeld (3-2) unstable; urgency=medium
 
