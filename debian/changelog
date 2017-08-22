@@ -1,3 +1,10 @@
+farbfeld (3-4) unstable; urgency=medium
+
+  * Build-depend on libjpeg-dev instead of libjpeg-turbo8-dev
+  * Set the maint LDFLAGS to -Wl,--no-as-needed
+
+ -- Paride Legovini <pl@ninthfloor.org>  Tue, 22 Aug 2017 15:30:11 +0200
+
 farbfeld (3-3) unstable; urgency=medium
 
   * Add missing references to debian/copyright
