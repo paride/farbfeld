@@ -3,7 +3,7 @@ Section: graphics
 Priority: extra
 Maintainer: Paride Legovini <pl@ninthfloor.org>
 Uploaders: Dmitry Bogatov <KAction@gnu.org>
-Build-Depends: debhelper (>=10), libjpeg62-turbo-dev, libpng-dev
+Build-Depends: debhelper (>=10), libjpeg-dev, libpng-dev
 Standards-Version: 4.0.0
 Homepage: http://tools.suckless.org/farbfeld
 Vcs-Git: https://anonscm.debian.org/cgit/collab-maint/farbfeld.git/
