@@ -3,7 +3,12 @@
 # https://wiki.debian.org/HardeningWalkthrough
 export DEB_BUILD_MAINT_OPTIONS  = hardening=+all
 export DEB_CFLAGS_MAINT_APPEND  = -Os -Wall -pedantic
-#export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+# --as-needed breaks the build of the package, so let's turn it off
+# explicitly. This is not needed in Debian, but the default may change.
+# Ubuntu already defaults to --as-needed, so disabling it makes the
+# package build there unmodified.
+export DEB_LDFLAGS_MAINT_APPEND = -Wl,--no-as-needed
 
 %:
 	dh $@
