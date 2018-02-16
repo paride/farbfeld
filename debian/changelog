@@ -2,6 +2,7 @@ farbfeld (3-5) UNRELEASED; urgency=medium
 
   * Bump Standards-Version to 4.1.3
   * Bump compat level to 11, build-depend on debhelper >= 11~
+  * Use the standard Debian build flags when compiling
 
  -- Paride Legovini <pl@ninthfloor.org>  Fri, 16 Feb 2018 20:32:36 +0100
 

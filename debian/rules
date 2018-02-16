@@ -2,7 +2,7 @@
 
 # https://wiki.debian.org/HardeningWalkthrough
 export DEB_BUILD_MAINT_OPTIONS  = hardening=+all
-export DEB_CFLAGS_MAINT_APPEND  = -Os -Wall -pedantic
+#export DEB_CFLAGS_MAINT_APPEND  = -Os -Wall -pedantic
 
 # --as-needed breaks the build of the package, so let's turn it off
 # explicitly. This is not needed in Debian, but the default may change.
