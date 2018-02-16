@@ -1,7 +1,7 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: farbfeld
 Upstream-Contact: Laslo Hunhold <dev@frign.de>
-Source: http://tools.suckless.org/farbfeld
+Source: https://tools.suckless.org/farbfeld
 
 Files: *
 Copyright:
@@ -52,8 +52,8 @@ Comment:
 
 Files: debian/*
 Copyright:
- 2017 Dmitry Bogatov <KAction@gnu.org>
- 2017 Paride Legovini <pl@ninthfloor.org>
+ 2017      Dmitry Bogatov <KAction@gnu.org>
+ 2017-2018 Paride Legovini <pl@ninthfloor.org>
 License: ISC
 
 License: ISC
