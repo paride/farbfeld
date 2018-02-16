@@ -1,6 +1,6 @@
 Source: farbfeld
 Section: graphics
-Priority: extra
+Priority: optional
 Maintainer: Paride Legovini <pl@ninthfloor.org>
 Uploaders: Dmitry Bogatov <KAction@gnu.org>
 Build-Depends: debhelper (>=11~), libjpeg-dev, libpng-dev
