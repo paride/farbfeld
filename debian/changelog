@@ -1,5 +1,6 @@
 farbfeld (3-5) UNRELEASED; urgency=medium
 
+  * Packaging repository moved to salsa
   * Bump Standards-Version to 4.1.3
   * Bump compat level to 11, build-depend on debhelper >= 11~
   * Use the standard Debian build flags when compiling
