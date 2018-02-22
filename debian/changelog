@@ -1,4 +1,4 @@
-farbfeld (3-5) UNRELEASED; urgency=medium
+farbfeld (3-5) unstable; urgency=medium
 
   * Packaging repository moved to salsa
   * Bump Standards-Version to 4.1.3
@@ -6,7 +6,7 @@ farbfeld (3-5) UNRELEASED; urgency=medium
   * Added upstream metadata file (d/upstream/metadata)
   * Use the standard Debian build flags when compiling
 
- -- Paride Legovini <pl@ninthfloor.org>  Thu, 22 Feb 2018 15:37:16 +0000
+ -- Paride Legovini <pl@ninthfloor.org>  Thu, 22 Feb 2018 17:17:05 +0000
 
 farbfeld (3-4) unstable; urgency=medium
 
