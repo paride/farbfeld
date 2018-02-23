@@ -1,12 +1,15 @@
 farbfeld (3-5) unstable; urgency=medium
 
   * Packaging repository moved to salsa
+  * The d/control Vcs- fields now point to the salsa repository
+  * Use the standard Debian build flags when compiling
   * Bump Standards-Version to 4.1.3
+    - Priority: extra replaced by Priority: optional
   * Bump compat level to 11, build-depend on debhelper >= 11~
   * Added upstream metadata file (d/upstream/metadata)
-  * Use the standard Debian build flags when compiling
+  * d/watch: use https URI and version=4 (no additional changes required)
 
- -- Paride Legovini <pl@ninthfloor.org>  Thu, 22 Feb 2018 17:17:05 +0000
+ -- Paride Legovini <pl@ninthfloor.org>  Fri, 23 Feb 2018 12:26:02 +0000
 
 farbfeld (3-4) unstable; urgency=medium
 
